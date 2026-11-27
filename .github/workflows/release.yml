@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      contents: read
+      contents: read # check out the code
       id-token: write # sign the provenance attestation
       attestations: write
     outputs:
