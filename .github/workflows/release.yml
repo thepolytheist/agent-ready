@@ -20,7 +20,7 @@ jobs:
     permissions:
       contents: read # check out the code
       id-token: write # sign the provenance attestation
-      attestations: write
+      attestations: write # store the provenance attestation
     outputs:
       tarball: ${{ steps.pack.outputs.tarball }}
     steps:
