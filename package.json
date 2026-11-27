@@ -1,0 +1,63 @@
+{
+	"name": "agent-ready",
+	"version": "0.1.0",
+	"description": "Grade how ready a repository is for AI coding agents: instructions, tests, type checks, CI, setup and guardrails.",
+	"license": "0BSD",
+	"author": "Mason Emery",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/thepolytheist/agent-ready.git"
+	},
+	"homepage": "https://github.com/thepolytheist/agent-ready#readme",
+	"bugs": "https://github.com/thepolytheist/agent-ready/issues",
+	"keywords": [
+		"agents",
+		"claude-code",
+		"ai",
+		"developer-experience",
+		"cli",
+		"linter",
+		"readiness"
+	],
+	"type": "module",
+	"sideEffects": false,
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		},
+		"./node": {
+			"types": "./dist/node.d.ts",
+			"default": "./dist/node.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"bin": {
+		"agent-ready": "dist/bin.js"
+	},
+	"files": [
+		"dist",
+		"!dist/**/*.test.*"
+	],
+	"engines": {
+		"node": ">=20"
+	},
+	"scripts": {
+		"build": "tsc -p tsconfig.build.json",
+		"typecheck": "tsc --noEmit",
+		"lint": "biome check .",
+		"format": "biome check --write .",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"selfcheck": "node dist/bin.js --min-grade A",
+		"verify": "npm run typecheck && npm run lint && npm test && npm run build && npm run selfcheck",
+		"prepare": "git config core.hooksPath .githooks || true",
+		"prepack": "npm run build"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.6.9",
+		"@types/node": "24.19.4",
+		"typescript": "5.9.3",
+		"vitest": "5.1.2"
+	}
+}
